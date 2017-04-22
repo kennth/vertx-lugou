@@ -1,0 +1,7 @@
+{  
+  "jdbcUrl": "jdbc:mysql://192.168.99.10:3306/helper",
+  "provider_class": "io.vertx.ext.jdbc.spi.impl.HikariCPDataSourceProvider",
+  "username": "root",
+  "password": "funmix",
+  "max_pool_size": 30
+}

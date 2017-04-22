@@ -1,0 +1,38 @@
+= Cheatsheets
+
+[[Contact]]
+== Contact
+
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[company]]`company`|`String`|-
+|[[contact]]`contact`|`String`|-
+|[[fhdz]]`fhdz`|`String`|-
+|[[htzq]]`htzq`|`String`|-
+|[[id]]`id`|`Number (Integer)`|-
+|[[memo]]`memo`|`String`|-
+|[[phone]]`phone`|`String`|-
+|[[rate]]`rate`|`Number (Integer)`|-
+|===
+
+[[User]]
+== User
+
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[avatarUrl]]`avatarUrl`|`String`|-
+|[[email]]`email`|`String`|-
+|[[id]]`id`|`Number (Long)`|-
+|[[password]]`password`|`String`|-
+|[[phone]]`phone`|`String`|-
+|[[status]]`status`|`Number (Integer)`|-
+|[[token]]`token`|`String`|-
+|[[username]]`username`|`String`|-
+|===
+
