@@ -12,10 +12,10 @@
 |[[contact]]`contact`|`String`|-
 |[[fhdz]]`fhdz`|`String`|-
 |[[htzq]]`htzq`|`String`|-
-|[[id]]`id`|`Number (Integer)`|-
+|[[id]]`id`|`Number (int)`|-
 |[[memo]]`memo`|`String`|-
 |[[phone]]`phone`|`String`|-
-|[[rate]]`rate`|`Number (Integer)`|-
+|[[rate]]`rate`|`Number (int)`|-
 |===
 
 [[User]]

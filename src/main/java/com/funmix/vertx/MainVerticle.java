@@ -39,7 +39,7 @@ public class MainVerticle extends AbstractVerticle {
 	  private ContactService contactService;
 
 	  private void initData() {
-		  JsonObject config = new JsonObject().put("provider_class", "io.vertx.ext.jdbc.spi.impl.HikariCPDataSourceProvider").put("jdbcUrl", "jdbc:mysql://192.168.99.10:3306/helper")
+		  JsonObject config = new JsonObject().put("provider_class", "io.vertx.ext.jdbc.spi.impl.HikariCPDataSourceProvider").put("jdbcUrl", "jdbc:mysql://localhost:3306/helper?useUnicode=true&characterEncoding=UTF-8")
 					.put("port", 3306).put("maxPoolSize", 10).put("username", "root").put("password", "funmix").put("database", "helper").put("charset", "UTF8")
 					.put("queryTimeout", 30);
 		  userService = new UserServiceImpl(vertx, config);
@@ -68,7 +68,8 @@ public class MainVerticle extends AbstractVerticle {
 
 	    // routes
 	    router.get(Constants.API_USER_GET).handler(this::handleGetUser);
-	    router.get(Constants.API_USER_LIST_ALL).handler(this::handleGetAll);
+	    router.get(Constants.API_USER_LIST_ALL).handler(this::handleUserGetAll);
+	    router.get(Constants.API_CONTACT_LIST_ALL).handler(this::handleContactGetAll);
 	    //router.post(Constants.API_USER_CREATE).handler(this::handleCreateUser);
 	    router.post(Constants.API_CONTACT_CREATE).handler(this::handleCreateContact);
 //	    router.patch(Constants.API_UPDATE).handler(this::handleUpdateUser);
@@ -98,7 +99,8 @@ public class MainVerticle extends AbstractVerticle {
 
 	private void handleCreateContact(RoutingContext context) {
 		try {
-			final Contact contact = new Contact(context.getBodyAsJson());
+			System.out.println(context.getBodyAsString());
+			final Contact contact = new Contact(new JsonObject(context.getBodyAsString()));			
 			final String encoded = Json.encodePrettily(contact);
 			contactService.insert(contact).setHandler(resultHandler(context, res -> {
 				if (res) {
@@ -129,8 +131,19 @@ public class MainVerticle extends AbstractVerticle {
 		}));
 	}
 
-	private void handleGetAll(RoutingContext context) {
+	private void handleUserGetAll(RoutingContext context) {
 		userService.getAll().setHandler(resultHandler(context, res -> {
+			if (res == null) {
+				serviceUnavailable(context);
+			} else {
+				context.response().putHeader("content-type", "application/json").end(Json.encodePrettily(res));
+			}
+		}));
+	}
+	
+	private void handleContactGetAll(RoutingContext context) {
+		System.out.println(context.getBodyAsString());
+		contactService.getAll().setHandler(resultHandler(context, res -> {
 			if (res == null) {
 				serviceUnavailable(context);
 			} else {

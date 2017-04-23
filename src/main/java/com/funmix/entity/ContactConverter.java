@@ -66,17 +66,13 @@ public class ContactConverter {
     if (obj.getHtzq() != null) {
       json.put("htzq", obj.getHtzq());
     }
-    if (obj.getId() != null) {
-      json.put("id", obj.getId());
-    }
+    json.put("id", obj.getId());
     if (obj.getMemo() != null) {
       json.put("memo", obj.getMemo());
     }
     if (obj.getPhone() != null) {
       json.put("phone", obj.getPhone());
     }
-    if (obj.getRate() != null) {
-      json.put("rate", obj.getRate());
-    }
+    json.put("rate", obj.getRate());
   }
 }

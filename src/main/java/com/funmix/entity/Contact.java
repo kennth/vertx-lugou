@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 
 @DataObject(generateConverter = true)
 public class Contact {
-    private Integer id;
+    private int id;
 
     private String company;
 
@@ -19,13 +19,13 @@ public class Contact {
 
     private String memo;
 
-    private Integer rate;
+    private int rate;
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -77,11 +77,11 @@ public class Contact {
         this.memo = memo == null ? null : memo.trim();
     }
 
-    public Integer getRate() {
+    public int getRate() {
         return rate;
     }
 
-    public void setRate(Integer rate) {
+    public void setRate(int rate) {
         this.rate = rate;
     }
     
