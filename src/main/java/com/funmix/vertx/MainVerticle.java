@@ -39,7 +39,7 @@ public class MainVerticle extends AbstractVerticle {
 	  private ContactService contactService;
 
 	  private void initData() {
-		  JsonObject config = new JsonObject().put("provider_class", "io.vertx.ext.jdbc.spi.impl.HikariCPDataSourceProvider").put("jdbcUrl", "jdbc:mysql://localhost:3306/helper?useUnicode=true&characterEncoding=UTF-8")
+		  JsonObject config = new JsonObject().put("provider_class", "io.vertx.ext.jdbc.spi.impl.HikariCPDataSourceProvider").put("jdbcUrl", "jdbc:mysql://192.168.99.10:3306/helper?useUnicode=true&characterEncoding=UTF-8")
 					.put("port", 3306).put("maxPoolSize", 10).put("username", "root").put("password", "funmix").put("database", "helper").put("charset", "UTF8")
 					.put("queryTimeout", 30);
 		  userService = new UserServiceImpl(vertx, config);
@@ -73,7 +73,7 @@ public class MainVerticle extends AbstractVerticle {
 	    //router.post(Constants.API_USER_CREATE).handler(this::handleCreateUser);
 	    router.post(Constants.API_CONTACT_CREATE).handler(this::handleCreateContact);
 	    router.put(Constants.API_CONTACT_UPDATE).handler(this::handleUpdateContact);
-//	    router.delete(Constants.API_DELETE).handler(this::handleDeleteOne);
+	    router.delete(Constants.API_CONTACT_DELETE).handler(this::handleDeleteContact);
 //	    router.delete(Constants.API_DELETE_ALL).handler(this::handleDeleteAll);
 
 		vertx.createHttpServer().requestHandler(router::accept).listen(config().getInteger("http.port", PORT), config().getString("http.address", HOST), result -> {
@@ -183,9 +183,9 @@ public class MainVerticle extends AbstractVerticle {
 	    };
 	  }
 
-	  private void handleDeleteOne(RoutingContext context) {
-	    String todoID = context.request().getParam("todoId");
-	    //service.delete(todoID).setHandler(deleteResultHandler(context));
+	  private void handleDeleteContact(RoutingContext context) {
+	    String contactID = context.request().getParam("contactID");
+	    contactService.delete(contactID).setHandler(deleteResultHandler(context));
 	  }
 
 	  

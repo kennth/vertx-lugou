@@ -10,11 +10,8 @@ import io.vertx.core.Future;
 public interface ContactService {
 
 	Future<Optional<Contact>> getContact(String contactID);
-
 	Future<List<Contact>> getAll();
-
 	Future<Boolean> insert(Contact contact);
-
 	Future<Boolean> update(Contact contact);
-
+	Future<Boolean> delete(String todoId);
 }
