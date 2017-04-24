@@ -72,7 +72,7 @@ public class MainVerticle extends AbstractVerticle {
 	    router.get(Constants.API_CONTACT_LIST_ALL).handler(this::handleContactGetAll);
 	    //router.post(Constants.API_USER_CREATE).handler(this::handleCreateUser);
 	    router.post(Constants.API_CONTACT_CREATE).handler(this::handleCreateContact);
-//	    router.patch(Constants.API_UPDATE).handler(this::handleUpdateUser);
+	    router.put(Constants.API_CONTACT_UPDATE).handler(this::handleUpdateContact);
 //	    router.delete(Constants.API_DELETE).handler(this::handleDeleteOne);
 //	    router.delete(Constants.API_DELETE_ALL).handler(this::handleDeleteAll);
 
@@ -152,26 +152,18 @@ public class MainVerticle extends AbstractVerticle {
 		}));
 	}
 
-	  private void handleUpdateTodo(RoutingContext context) {
+	  private void handleUpdateContact(RoutingContext context) {
 	    try {
-	      String userID = context.request().getParam("userID");
-	      final User user = new User(context.getBodyAsString());
-	      // handle error
-	      if (userID == null) {
-	        sendError(400, context.response());
-	        return;
-	      }
-	      /*service.update(userID, user)
-	        .setHandler(resultHandler(context, res -> {
-	          if (res == null)
-	            notFound(context);
-	          else {
-	            final String encoded = Json.encodePrettily(res);
-	            context.response()
-	              .putHeader("content-type", "application/json")
-	              .end(encoded);
-	          }
-	        }));*/
+	    	System.out.println(context.getBodyAsString());
+			final Contact contact = new Contact(new JsonObject(context.getBodyAsString()));			
+			final String encoded = Json.encodePrettily(contact);
+			contactService.update(contact).setHandler(resultHandler(context, res -> {
+				if (res) {
+					context.response().setStatusCode(201).putHeader("content-type", "application/json").end(encoded);
+				} else {
+					serviceUnavailable(context);
+				}
+			}));
 	    } catch (DecodeException e) {
 	      badRequest(context);
 	    }

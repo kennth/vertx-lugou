@@ -15,4 +15,6 @@ public interface ContactService {
 
 	Future<Boolean> insert(Contact contact);
 
+	Future<Boolean> update(Contact contact);
+
 }

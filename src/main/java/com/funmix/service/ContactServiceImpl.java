@@ -23,7 +23,7 @@ public class ContactServiceImpl implements ContactService {
 	private static final String	SQL_INSERT		= "INSERT INTO tcontact " + "(company,contact,phone,fhdz,htzq,memo,rate) VALUES (?, ?, ?, ?, ?, ?, ?)";
 	private static final String	SQL_QUERY		= "SELECT * FROM tcontact WHERE id = ? limit 1";
 	private static final String	SQL_QUERY_ALL	= "SELECT * FROM tcontact";
-	private static final String	SQL_UPDATE		= "UPDATE WHERE id = ?";
+	private static final String	SQL_UPDATE		= "UPDATE company=?,contact=?,phone=?,fhdz=?,htzq=?,memo=?,rate=? WHERE id = ?";
 	private static final String	SQL_DELETE		= "DELETE FROM tcontact WHERE id = ?";
 
 	public ContactServiceImpl(JsonObject config) {
@@ -96,6 +96,31 @@ public class ContactServiceImpl implements ContactService {
 					.add(contact.getHtzq())
 					.add(contact.getMemo())
 					.add(contact.getRate()), r -> {
+						if (r.failed()) {
+							result.fail(r.cause());
+						} else {
+							result.complete(true);
+						}
+						connection.close();
+					});
+		}));
+		return result;
+	}
+	
+	@Override
+	public Future<Boolean> update(Contact contact) {
+		Future<Boolean> result = Future.future();
+		client.getConnection(connHandler(result, connection -> {
+			connection.updateWithParams(SQL_UPDATE, 
+				new JsonArray()
+					.add(contact.getCompany())
+					.add(contact.getContact())
+					.add(contact.getPhone())
+					.add(contact.getFhdz())
+					.add(contact.getHtzq())
+					.add(contact.getMemo())
+					.add(contact.getRate())
+					.add(contact.getId()), r -> {
 						if (r.failed()) {
 							result.fail(r.cause());
 						} else {
