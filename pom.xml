@@ -10,7 +10,7 @@
 
 	<properties>
 		<vertx.version>3.4.1</vertx.version>
-		<main.verticle>com.funmix.vert.MainVerticle</main.verticle>
+		<main.verticle>com.funmix.vertx.MainVerticle</main.verticle>
 	</properties>
 
 	<dependencyManagement>
@@ -92,8 +92,9 @@
 								<annotationProcessors>
 									<annotationProcessor>io.vertx.codegen.CodeGenProcessor</annotationProcessor>
 								</annotationProcessors>
+								<generatedSourcesDirectory>src/main/java</generatedSourcesDirectory>
 								<compilerArgs>
-									<arg>-AoutputDirectory=D:/vertx-lugou/src/main/generated</arg>
+									<arg>-Acodegen.output=${project.basedir}/src/main</arg>
 								</compilerArgs>
 							</configuration>
 						</execution>

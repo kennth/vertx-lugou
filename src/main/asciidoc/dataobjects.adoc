@@ -1,5 +1,170 @@
 = Cheatsheets
 
+[[Company]]
+== Company
+
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[address]]`address`|`String`|-
+|[[companyname]]`companyname`|`String`|-
+|[[contact]]`contact`|`String`|-
+|[[contact_phone]]`contact_phone`|`String`|-
+|[[created_time]]`created_time`|`String`|-
+|[[id]]`id`|`Number (int)`|-
+|[[latitude]]`latitude`|`Number (double)`|-
+|[[longitude]]`longitude`|`Number (double)`|-
+|[[memo]]`memo`|`String`|-
+|[[phone]]`phone`|`String`|-
+|[[status]]`status`|`Number (int)`|-
+|===
+
+[[Contact]]
+== Contact
+
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[company]]`company`|`String`|-
+|[[contact]]`contact`|`String`|-
+|[[fhdz]]`fhdz`|`String`|-
+|[[htzq]]`htzq`|`String`|-
+|[[id]]`id`|`Number (int)`|-
+|[[memo]]`memo`|`String`|-
+|[[phone]]`phone`|`String`|-
+|[[rate]]`rate`|`Number (int)`|-
+|===
+
+[[Driver]]
+== Driver
+
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[created_time]]`created_time`|`String`|-
+|[[driverlicense]]`driverlicense`|`String`|-
+|[[email]]`email`|`String`|-
+|[[id]]`id`|`Number (int)`|-
+|[[memo]]`memo`|`String`|-
+|[[phone]]`phone`|`String`|-
+|[[status]]`status`|`Number (int)`|-
+|[[username]]`username`|`String`|-
+|===
+
+[[Line]]
+== Line
+
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[drivername]]`drivername`|`String`|-
+|[[endaddr]]`endaddr`|`String`|-
+|[[endtime]]`endtime`|`String`|-
+|[[id]]`id`|`Number (int)`|-
+|[[licenseplate]]`licenseplate`|`String`|-
+|[[linename]]`linename`|`String`|-
+|[[path]]`path`|`String`|-
+|[[process]]`process`|`Number (int)`|-
+|[[startaddr]]`startaddr`|`String`|-
+|[[starttime]]`starttime`|`String`|-
+|[[status]]`status`|`Number (int)`|-
+|===
+
+[[Order]]
+== Order
+
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[abnormal]]`abnormal`|`Number (int)`|-
+|[[attachment]]`attachment`|`String`|-
+|[[companyid]]`companyid`|`Number (int)`|-
+|[[createtime]]`createtime`|`String`|-
+|[[deliverymode]]`deliverymode`|`Number (int)`|-
+|[[drivername]]`drivername`|`String`|-
+|[[endway]]`endway`|`Number (int)`|-
+|[[fhaddress]]`fhaddress`|`String`|-
+|[[fhlatitude]]`fhlatitude`|`Number (Double)`|-
+|[[fhlongitude]]`fhlongitude`|`Number (Double)`|-
+|[[fhname]]`fhname`|`String`|-
+|[[fhphone]]`fhphone`|`String`|-
+|[[fhtime]]`fhtime`|`String`|-
+|[[fhunit]]`fhunit`|`String`|-
+|[[fhunitphone]]`fhunitphone`|`String`|-
+|[[id]]`id`|`Number (int)`|-
+|[[licenseplate]]`licenseplate`|`String`|-
+|[[memo]]`memo`|`String`|-
+|[[orderno]]`orderno`|`String`|-
+|[[packagecount]]`packagecount`|`Number (double)`|-
+|[[packing]]`packing`|`String`|-
+|[[paperreceipt]]`paperreceipt`|`Number (int)`|-
+|[[paymentmode]]`paymentmode`|`Number (int)`|-
+|[[productcode]]`productcode`|`String`|-
+|[[productname]]`productname`|`String`|-
+|[[sdtime]]`sdtime`|`String`|-
+|[[shaddress]]`shaddress`|`String`|-
+|[[shlatitude]]`shlatitude`|`Number (Double)`|-
+|[[shlongitude]]`shlongitude`|`Number (Double)`|-
+|[[shname]]`shname`|`String`|-
+|[[shphone]]`shphone`|`String`|-
+|[[shtime]]`shtime`|`String`|-
+|[[shunit]]`shunit`|`String`|-
+|[[shunitphone]]`shunitphone`|`String`|-
+|[[status]]`status`|`Number (int)`|-
+|[[totalfee]]`totalfee`|`Number (double)`|-
+|[[updatetime]]`updatetime`|`String`|-
+|[[weight]]`weight`|`Number (double)`|-
+|===
+
+[[Site]]
+== Site
+
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[address]]`address`|`String`|-
+|[[contact]]`contact`|`String`|-
+|[[contact_phone]]`contact_phone`|`String`|-
+|[[id]]`id`|`Number (int)`|-
+|[[latitude]]`latitude`|`Number (double)`|-
+|[[longitude]]`longitude`|`Number (double)`|-
+|[[memo]]`memo`|`String`|-
+|[[phone]]`phone`|`String`|-
+|[[sitename]]`sitename`|`String`|-
+|===
+
+[[Truck]]
+== Truck
+
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[id]]`id`|`Number (int)`|-
+|[[lastupdate]]`lastupdate`|`String`|-
+|[[latitude]]`latitude`|`Number (double)`|-
+|[[licenseplate]]`licenseplate`|`String`|-
+|[[longitude]]`longitude`|`Number (double)`|-
+|[[tonnage]]`tonnage`|`Number (double)`|-
+|[[truck_type]]`truck_type`|`String`|-
+|[[volume_height]]`volume_height`|`Number (double)`|-
+|[[volume_length]]`volume_length`|`Number (double)`|-
+|[[volume_width]]`volume_width`|`Number (double)`|-
+|===
+
 [[User]]
 == User
 
@@ -8,13 +173,18 @@
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[avatarUrl]]`avatarUrl`|`String`|-
+|[[access_status]]`access_status`|`Number (int)`|-
+|[[api_routers]]`api_routers`|`String`|-
+|[[companyid]]`companyid`|`Number (int)`|-
+|[[created_time]]`created_time`|`String`|-
+|[[default_web_routers]]`default_web_routers`|`String`|-
 |[[email]]`email`|`String`|-
-|[[id]]`id`|`Number (Long)`|-
+|[[id]]`id`|`Number (int)`|-
 |[[password]]`password`|`String`|-
 |[[phone]]`phone`|`String`|-
-|[[status]]`status`|`Number (Integer)`|-
+|[[status]]`status`|`Number (int)`|-
 |[[token]]`token`|`String`|-
 |[[username]]`username`|`String`|-
+|[[web_routers]]`web_routers`|`String`|-
 |===
 

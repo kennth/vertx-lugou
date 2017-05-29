@@ -5,14 +5,17 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.funmix.entity.Contact;
+import com.funmix.entity.User;
 
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
+import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.jdbc.JDBCClient;
+import io.vertx.ext.sql.ResultSet;
 import io.vertx.ext.sql.SQLConnection;
 
 public class ContactServiceImpl implements ContactService {
@@ -22,7 +25,8 @@ public class ContactServiceImpl implements ContactService {
 
 	private static final String	SQL_INSERT		= "INSERT INTO tcontact " + "(company,contact,phone,fhdz,htzq,memo,rate) VALUES (?, ?, ?, ?, ?, ?, ?)";
 	private static final String	SQL_QUERY		= "SELECT * FROM tcontact WHERE id = ? limit 1";
-	private static final String	SQL_QUERY_ALL	= "SELECT * FROM tcontact";
+	private static final String	SQL_QUERY_ALL	= "SELECT * FROM tcontact order by ? limit ?,?";
+	private static final String	SQL_QUERY_COUNT	= "SELECT count(*) as count FROM tcontact";
 	private static final String	SQL_UPDATE		= "UPDATE tcontact set company=?,contact=?,phone=?,fhdz=?,htzq=?,memo=?,rate=? WHERE id = ?";
 	private static final String	SQL_DELETE		= "DELETE FROM tcontact WHERE id = ?";
 
@@ -46,24 +50,59 @@ public class ContactServiceImpl implements ContactService {
 			}
 		};
 	}
-
-	@Override
-	public Future<List<Contact>> getAll() {
-		Future<List<Contact>> result = Future.future();
-		client.getConnection(connHandler(result, connection -> connection.query(SQL_QUERY_ALL, r -> {
-			if (r.failed()) {
-				result.fail(r.cause());
-			} else {
-				List<Contact> users = r.result().getRows().stream().map(Contact::new).collect(Collectors.toList());
-				result.complete(users);
-			}
+	
+	public Future<List<User>> getAll() {
+		Future<List<User>> result = Future.future();
+		client.getConnection(connHandler(result, connection -> {
+			
+			connection.query(SQL_QUERY_ALL, r -> {
+				if (r.failed()) {
+					result.fail(r.cause());
+				} else {
+					List<User> users = r.result().getRows().stream().map(User::new).collect(Collectors.toList());
+					result.complete(users);
+				}				
+			});
 			connection.close();
-		})));
+		}));
 		return result;
 	}
+	
+	@Override
+	public Future<JsonObject> getAll(JsonArray params) {
+		Future<JsonObject> result = Future.future();
+		System.out.println(Json.encodePrettily(params));
+		JsonObject jrs = new JsonObject();		
+		client.getConnection(connHandler(result, connection -> {
+			connection.query(SQL_QUERY_COUNT, r -> {				
+				if (r.failed()) {
+					System.out.println(r.cause());
+					result.fail(r.cause());
+				} else {
+					int count = r.result().getRows().get(0).getInteger("count");
+					System.out.println(count);
+					jrs.put("count", count);					
+				}
+				//result.complete(jrs);
+			});					
+			connection.queryWithParams(SQL_QUERY_ALL, params, r -> {				
+				if (r.failed()) {
+					System.out.println(r.cause());
+					result.fail(r.cause());
+				} else {					
+					jrs.put("data", r.result().getRows().stream().map(Contact::new).collect(Collectors.toList()));					
+				}
+				result.complete(jrs); 
+			});		
+			
+			connection.close();
+			
+		}));
+		return result;
+	}	
 
 	@Override
-	public Future<Optional<Contact>> getContact(String contactID) {
+	public Future<Optional<Contact>> getOne(String contactID) {
 		Future<Optional<Contact>> result = Future.future();
 		client.getConnection(connHandler(result, connection -> {
 			connection.queryWithParams(SQL_QUERY, new JsonArray().add(contactID), r -> {

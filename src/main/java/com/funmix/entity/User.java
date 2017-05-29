@@ -1,36 +1,33 @@
 package com.funmix.entity;
 
-import java.util.Date;
-
+import java.time.*;
 import io.vertx.codegen.annotations.DataObject;
 import io.vertx.core.json.JsonObject;
 
 @DataObject(generateConverter = true)
 public class User {
-	private Long	id;
-
-	private String	username;
-
-	private String	email;
-
-	private String	phone;
-
-	private String	password;
-
-	private String	avatarUrl;
-
-	private Date	createdAt;
-
-	private Integer	status;
-
-	private String	token;
+	int id;
+	int companyid;
+	String username;
+	String email;
+	String phone;
+	String password;
+	String created_time;
+	int status;
+	String token;
+	int access_status;
+	String web_routers;
+	String api_routers;
+	String default_web_routers;
 
 	public User(JsonObject obj) {
 		UserConverter.fromJson(obj, this);
 	}
 
 	public User(String jsonStr) {
+		System.out.println(1);
 		UserConverter.fromJson(new JsonObject(jsonStr), this);
+		System.out.println(2);
 	}
 
 	public JsonObject toJson() {
@@ -39,12 +36,20 @@ public class User {
 		return json;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getCompanyid() {
+		return companyid;
+	}
+
+	public void setCompanyid(int companyid) {
+		this.companyid = companyid;
 	}
 
 	public String getUsername() {
@@ -52,7 +57,7 @@ public class User {
 	}
 
 	public void setUsername(String username) {
-		this.username = username == null ? null : username.trim();
+		this.username = username;
 	}
 
 	public String getEmail() {
@@ -60,7 +65,7 @@ public class User {
 	}
 
 	public void setEmail(String email) {
-		this.email = email == null ? null : email.trim();
+		this.email = email;
 	}
 
 	public String getPhone() {
@@ -68,7 +73,7 @@ public class User {
 	}
 
 	public void setPhone(String phone) {
-		this.phone = phone == null ? null : phone.trim();
+		this.phone = phone;
 	}
 
 	public String getPassword() {
@@ -76,30 +81,22 @@ public class User {
 	}
 
 	public void setPassword(String password) {
-		this.password = password == null ? null : password.trim();
+		this.password = password;
 	}
 
-	public String getAvatarUrl() {
-		return avatarUrl;
+	public String getCreated_time() {
+		return created_time;
 	}
 
-	public void setAvatarUrl(String avatarUrl) {
-		this.avatarUrl = avatarUrl == null ? null : avatarUrl.trim();
+	public void setCreated_time(String created_time) {
+		this.created_time = created_time;
 	}
 
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public Integer getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 
@@ -108,6 +105,39 @@ public class User {
 	}
 
 	public void setToken(String token) {
-		this.token = token == null ? null : token.trim();
+		this.token = token;
 	}
+
+	public int getAccess_status() {
+		return access_status;
+	}
+
+	public void setAccess_status(int access_status) {
+		this.access_status = access_status;
+	}
+
+	public String getWeb_routers() {
+		return web_routers;
+	}
+
+	public void setWeb_routers(String web_routers) {
+		this.web_routers = web_routers;
+	}
+
+	public String getApi_routers() {
+		return api_routers;
+	}
+
+	public void setApi_routers(String api_routers) {
+		this.api_routers = api_routers;
+	}
+
+	public String getDefault_web_routers() {
+		return default_web_routers;
+	}
+
+	public void setDefault_web_routers(String default_web_routers) {
+		this.default_web_routers = default_web_routers;
+	}
+	
 }
